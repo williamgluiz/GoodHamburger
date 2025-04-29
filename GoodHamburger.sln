@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-API", "1-API", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{D395310D-65B8-485B-A15C-EBEE950568A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Infrastructure", "4-Infrastructure", "{4CAD4CDE-1CBB-40E1-970B-54DB17E2CF29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.Data", "GoodHamburger.Data\GoodHamburger.Data.csproj", "{250B8C40-1817-4E91-B708-B8B2494524A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.Domain", "GoodHamburger.Business\GoodHamburger.Domain.csproj", "{2EC86B4E-33D9-46EF-9046-3811B56239BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.API", "GoodHamburger.API\GoodHamburger.API.csproj", "{C0A43A77-3F29-45E5-86DC-9F0670CF64E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{501B4608-970C-401C-8014-E0E44E608ED2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.Application", "GoodHamburger.Application\GoodHamburger.Application.csproj", "{BE8C1D0C-5889-4D3E-AD4E-862A34D8BCD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{250B8C40-1817-4E91-B708-B8B2494524A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250B8C40-1817-4E91-B708-B8B2494524A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250B8C40-1817-4E91-B708-B8B2494524A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250B8C40-1817-4E91-B708-B8B2494524A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC86B4E-33D9-46EF-9046-3811B56239BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC86B4E-33D9-46EF-9046-3811B56239BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC86B4E-33D9-46EF-9046-3811B56239BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC86B4E-33D9-46EF-9046-3811B56239BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A43A77-3F29-45E5-86DC-9F0670CF64E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A43A77-3F29-45E5-86DC-9F0670CF64E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A43A77-3F29-45E5-86DC-9F0670CF64E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A43A77-3F29-45E5-86DC-9F0670CF64E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8C1D0C-5889-4D3E-AD4E-862A34D8BCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8C1D0C-5889-4D3E-AD4E-862A34D8BCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8C1D0C-5889-4D3E-AD4E-862A34D8BCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8C1D0C-5889-4D3E-AD4E-862A34D8BCD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{250B8C40-1817-4E91-B708-B8B2494524A5} = {4CAD4CDE-1CBB-40E1-970B-54DB17E2CF29}
+		{2EC86B4E-33D9-46EF-9046-3811B56239BC} = {D395310D-65B8-485B-A15C-EBEE950568A4}
+		{C0A43A77-3F29-45E5-86DC-9F0670CF64E4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{BE8C1D0C-5889-4D3E-AD4E-862A34D8BCD7} = {501B4608-970C-401C-8014-E0E44E608ED2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3E698B7-BA50-4669-AF0E-F05E70E4D174}
+	EndGlobalSection
+EndGlobal
