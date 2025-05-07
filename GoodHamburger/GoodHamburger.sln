@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-API", "1-API", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Business", "2-Business", "{A70D764D-112B-47EC-8FD3-909793FB9B26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infrastructure", "3-Infrastructure", "{F3F67A53-A6E5-4E29-8099-225B5A83FF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.API", "GoodHamburger.API\GoodHamburger.API.csproj", "{DE470848-E8A6-4CF3-B14F-291A7D1438ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.Business", "GoodHamburger.Domain\GoodHamburger.Business.csproj", "{500135F7-3E1F-41B4-B089-AF1D9476AB8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodHamburger.Data", "GoodHamburger.Data\GoodHamburger.Data.csproj", "{A7CF38B7-A571-4053-A2BD-5CAD2A814D46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE470848-E8A6-4CF3-B14F-291A7D1438ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE470848-E8A6-4CF3-B14F-291A7D1438ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE470848-E8A6-4CF3-B14F-291A7D1438ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE470848-E8A6-4CF3-B14F-291A7D1438ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{500135F7-3E1F-41B4-B089-AF1D9476AB8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{500135F7-3E1F-41B4-B089-AF1D9476AB8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{500135F7-3E1F-41B4-B089-AF1D9476AB8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{500135F7-3E1F-41B4-B089-AF1D9476AB8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7CF38B7-A571-4053-A2BD-5CAD2A814D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7CF38B7-A571-4053-A2BD-5CAD2A814D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7CF38B7-A571-4053-A2BD-5CAD2A814D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7CF38B7-A571-4053-A2BD-5CAD2A814D46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE470848-E8A6-4CF3-B14F-291A7D1438ED} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{500135F7-3E1F-41B4-B089-AF1D9476AB8E} = {A70D764D-112B-47EC-8FD3-909793FB9B26}
+		{A7CF38B7-A571-4053-A2BD-5CAD2A814D46} = {F3F67A53-A6E5-4E29-8099-225B5A83FF24}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6D8BD7E-15FD-4174-A5DE-DD6547C467E6}
+	EndGlobalSection
+EndGlobal

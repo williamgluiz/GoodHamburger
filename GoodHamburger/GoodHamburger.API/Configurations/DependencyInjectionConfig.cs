@@ -1,6 +1,4 @@
-﻿using GoodHamburger.Application.Interfaces;
-using GoodHamburger.Application.Services;
-using GoodHamburger.Data.Repositories;
+﻿using GoodHamburger.Data.Repositories;
 using GoodHamburger.Domain.Interfaces;
 using GoodHamburger.Domain.Services;
 
@@ -13,8 +11,6 @@ namespace GoodHamburger.API.Configurations
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<DiscountService>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IOrderService, OrderService>();
 
             return services;
         }

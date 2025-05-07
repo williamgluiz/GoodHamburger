@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GoodHamburger.Application.DTOs.Order;
+using GoodHamburger.API.DTOs.Order;
 using GoodHamburger.Application.DTOs.Product;
 using GoodHamburger.Domain.Models;
 
@@ -9,10 +9,10 @@ namespace GoodHamburger.Application.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Product, ProductDTO>()
+            CreateMap<Product, ProductViewModel>()
                 .ForMember(d => d.Type, opt => opt.MapFrom(s => s.Type.ToString()));
 
-            CreateMap<ProductDTO, Product>()
+            CreateMap<ProductViewModel, Product>()
                 .ForMember(d => d.Type, opt => opt.MapFrom(s => Enum.Parse<ProductType>(s.Type)));
 
             CreateMap<Order, OrderResponseDTO>();

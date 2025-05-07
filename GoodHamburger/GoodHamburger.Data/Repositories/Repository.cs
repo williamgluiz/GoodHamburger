@@ -31,7 +31,7 @@ namespace GoodHamburger.Data.Repositories
         public virtual async Task UpdateAsync(TEntity entity)
         {
             DbSet.Entry(entity).State = EntityState.Modified;
-            DbSet.Update(entity);
+            //DbSet.Update(entity);
             await SaveChanges();
         }
 

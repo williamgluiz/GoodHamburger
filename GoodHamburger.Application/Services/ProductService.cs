@@ -29,7 +29,7 @@ namespace GoodHamburger.Application.Services
             try
             {
                 var products = await _productRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<ProductDTO>>(products);
+                return _mapper.Map<IEnumerable<ProductDTO>>(products.OrderBy(item => item.Type));
             }
             catch (Exception ex)
             {
