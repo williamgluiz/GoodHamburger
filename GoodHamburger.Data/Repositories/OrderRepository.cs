@@ -7,7 +7,7 @@ namespace GoodHamburger.Data.Repositories
 {
     public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        public OrderRepository(AppDbContext? db) : base(db) { }
+        public OrderRepository(AppDbContext db) : base(db) { }
 
         public override async Task<IEnumerable<Order>> GetAllAsync()
         {
@@ -23,6 +23,16 @@ namespace GoodHamburger.Data.Repositories
                 .Include(o => o.Items)
                 .ThenInclude(i => i.Product)
                 .FirstOrDefaultAsync(o => o.Id == id);
+        }
+
+        public void MarkOrderItemForDeletion(OrderItem item)
+        {
+            Db.Entry(item).State = EntityState.Deleted;
+        }
+
+        public void MarkNewOrderItemAdded(OrderItem item)
+        {
+            Db.Entry(item).State = EntityState.Added;
         }
     }
 }

@@ -1,9 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿{
+  "items": [
+    {
+      "productId": "6cae6240-75a5-4d3c-b426-721b9e16f795",
+      "quantity": 1
+    },{
+      "productId": "94672305-7a93-4605-b0ac-4384cf2aeea6",
+      "quantity": 1
+    }
+  ]
+}
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-</Project>
+53339425-728f-4305-8a06-898041cf6535

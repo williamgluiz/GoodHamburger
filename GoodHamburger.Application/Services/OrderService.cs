@@ -2,6 +2,7 @@
 using FluentValidation;
 using GoodHamburger.Application.DTOs.Order;
 using GoodHamburger.Application.Interfaces;
+using GoodHamburger.Data.Context;
 using GoodHamburger.Domain.Interfaces;
 using GoodHamburger.Domain.Models;
 
@@ -18,6 +19,22 @@ namespace GoodHamburger.Application.Services
             _productRepository = productRepository;
             _orderRepository = orderRepository;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<OrderResponseDTO>> GetAllAsync()
+        {
+            var orders = await _orderRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<OrderResponseDTO>>(orders);
+        }
+
+        public async Task<OrderResponseDTO?> GetByIdAsync(Guid id)
+        {
+            var order = await _orderRepository.GetByIdAsync(id);
+
+            if (order == null)
+                return null;
+
+            return _mapper.Map<OrderResponseDTO>(order);
         }
 
         public async Task<OrderResponseDTO> CreateOrderAsync(CreateOrderDTO dto)
@@ -45,6 +62,44 @@ namespace GoodHamburger.Application.Services
             return _mapper.Map<OrderResponseDTO>(order);
         }
 
+        public async Task<OrderResponseDTO> UpdateOrderAsync(Guid id, UpdateOrderDTO dto)
+        {
+            var order = await _orderRepository.GetByIdAsync(id);
+            if (order == null)
+                throw new Exception($"Order {id} not found");
+
+            foreach (var existingItem in order.Items.ToList())
+            {
+                _orderRepository.MarkOrderItemForDeletion(existingItem);
+                order.Items.Remove(existingItem);
+            }
+
+            foreach (var itemDto in dto.Items)
+            {
+                var product = await _productRepository.GetByIdAsync(itemDto.ProductId);
+                if (product == null)
+                    throw new Exception($"Product {itemDto.ProductId} not found");
+
+                var newItem = new OrderItem
+                {
+                    Product = product,
+                    ProductId = product.Id,
+                    Quantity = itemDto.Quantity,
+                    Order = order,        
+                    OrderId = order.Id   
+                };
+
+                _orderRepository.MarkNewOrderItemAdded(newItem);
+                order.Items.Add(newItem);
+            }
+
+            CalculateOrder(order);
+
+            await _orderRepository.UpdateAsync(order);
+
+            return _mapper.Map<OrderResponseDTO>(order);
+        }        
+
         public async Task<bool> DeleteAsync(Guid id)
         {
             var order = await _orderRepository.GetByIdAsync(id);
@@ -54,54 +109,6 @@ namespace GoodHamburger.Application.Services
 
             await _orderRepository.DeleteAsync(id);
             return true;
-        }
-
-        public async Task<IEnumerable<OrderResponseDTO>> GetAllAsync()
-        {
-            var orders = await _orderRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<OrderResponseDTO>>(orders);
-        }
-
-        public async Task<OrderResponseDTO?> GetByIdAsync(Guid id)
-        {
-            var order = await _orderRepository.GetByIdAsync(id);
-
-            if (order == null)
-                return null;
-
-            return _mapper.Map<OrderResponseDTO>(order);
-        }
-
-        public async Task<OrderResponseDTO> UpdateOrderAsync(Guid id, UpdateOrderDTO dto)
-        {
-            var order = await _orderRepository.GetByIdAsync(id);
-
-            if (order == null)
-                return null;
-
-            order.Items.Clear();
-
-            //_orderRepository.Attach(order);
-
-            foreach (var item in dto.Items)
-            {
-                var product = await _productRepository.GetByIdAsync(item.ProductId);
-                if (product == null)
-                    throw new Exception($"Product with id {item.ProductId} not found.");
-
-                order.Items.Add(new OrderItem
-                {
-                    ProductId = product.Id,
-                    Product = product,
-                    Quantity = item.Quantity
-                });
-            }
-
-            CalculateOrder(order);
-
-            await _orderRepository.UpdateAsync(order);
-
-            return _mapper.Map<OrderResponseDTO>(order);
         }
 
         public async Task<bool> HasDuplicatedProductTypesAsync(IEnumerable<OrderItemDTO> items)

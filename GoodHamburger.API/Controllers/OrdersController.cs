@@ -1,4 +1,5 @@
-﻿using GoodHamburger.Application.DTOs.Order;
+﻿using Azure.Core;
+using GoodHamburger.Application.DTOs.Order;
 using GoodHamburger.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -84,10 +85,13 @@ public class OrdersController : ControllerBase
 
         try
         {
-            var hasDuplicates = await _orderService.HasDuplicatedProductTypesAsync(dto.Items);
+            //var hasDuplicates = await _orderService.HasDuplicatedProductTypesAsync(dto.Items);
 
-            if (hasDuplicates)
-                return BadRequest("The order cannot contain more than one sandwich, fries, or soda.");
+            //if (hasDuplicates)
+                //return BadRequest("The order cannot contain more than one sandwich, fries, or soda.");
+
+            var order = await _orderService.GetByIdAsync(id);
+            if (order == null) return NotFound($"Order with ID '{id}' not found.");
 
             var result = await _orderService.UpdateOrderAsync(id, dto);
 
@@ -106,9 +110,10 @@ public class OrdersController : ControllerBase
     [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteOrder(Guid id)
     {
-        _logger.LogInformation("DELETE /api/Orders/{id} called at: {{time}}.", DateTime.UtcNow);
+        _logger.LogInformation($"DELETE /api/Orders/{id} called at: {DateTime.UtcNow}.");
 
         try
         {

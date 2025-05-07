@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GoodHamburger.Business\GoodHamburger.Domain.csproj" />
+    <ProjectReference Include="..\GoodHamburger.Data\GoodHamburger.Data.csproj" />
   </ItemGroup>
 
 </Project>

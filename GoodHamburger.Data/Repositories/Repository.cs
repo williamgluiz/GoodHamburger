@@ -10,9 +10,9 @@ namespace GoodHamburger.Data.Repositories
         protected readonly AppDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        protected Repository(AppDbContext? db)
+        protected Repository(AppDbContext db)
         {
-            Db = db ?? throw new ArgumentNullException(nameof(db));
+            Db = db;
             DbSet = Db.Set<TEntity>();
         }
 
@@ -30,18 +30,17 @@ namespace GoodHamburger.Data.Repositories
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
-            DbSet.Entry(entity).State = EntityState.Modified;
             DbSet.Update(entity);
             await SaveChanges();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             var entity = await DbSet.FindAsync(id);
 
             if (entity == null)
                 throw new InvalidOperationException("Entity not found");
-                
+
             DbSet.Remove(entity);
             await SaveChanges();
         }
