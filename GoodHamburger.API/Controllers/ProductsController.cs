@@ -2,106 +2,104 @@
 using GoodHamburger.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GoodHamburger.API.Controllers
+namespace GoodHamburger.API.Controllers;
+
+[ApiController]
+[Route("products")]
+public class ProductsController : ControllerBase
 {
-    [ApiController]
-    [Route("products")]
-    public class ProductsController : ControllerBase
+    private readonly IProductService _productService;
+    private readonly ILogger<ProductsController> _logger;
+
+    /// <summary>
+    /// Initializes a new instance of the ProductsController.
+    /// </summary>
+    /// <param name="productService">The service responsible for handling product-related operations.</param>
+    /// <param name="logger">The logger for recording information and errors related to the ProductsController.</param>
+    public ProductsController(IProductService productService, ILogger<ProductsController> logger)
     {
-        private readonly IProductService _productService;
-        private readonly ILogger<ProductsController> _logger;
+        _productService = productService;
+        _logger = logger;
+    }
 
-        public ProductsController(IProductService productService, ILogger<ProductsController> logger)
+    /// <summary>
+    /// Retrieves all products from the system.
+    /// </summary>
+    /// <returns>A list of products. If no products are found, returns a 204 No Content status.</returns>
+    /// <response code="200">Returns a list of products.</response>
+    /// <response code="204">No products found.</response>
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetAllProducts()
+    {
+        _logger.LogInformation($"GET /products called at: {DateTime.UtcNow}.");
+
+        var products = await _productService.GetAllProductsAsync();
+
+        if (!products.Any())
         {
-            _productService = productService;
-            _logger = logger;
+            _logger.LogWarning("No products found.");
+
+            return NoContent();
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetAllProducts()
+        _logger.LogInformation($"Returning {products.Count()} products.");
+
+        return Ok(products);
+    }
+
+    /// <summary>
+    /// Retrieves all sandwiches from the system.
+    /// </summary>
+    /// <returns>A list of sandwiches. If no sandwiches are found, returns a 204 No Content status.</returns>
+    /// <response code="200">Returns a list of sandwiches.</response>
+    /// <response code="204">No sandwiches found.</response>
+    [HttpGet("sandwiches")]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetSandwiches()
+    {
+        _logger.LogInformation($"GET /products/sandwiches called at: {DateTime.UtcNow}.");
+
+        var sandwiches = await _productService.GetSandwichesAsync();
+
+        if (!sandwiches.Any())
         {
-            _logger.LogInformation($"Get /products called at: {DateTime.UtcNow}.");
+            _logger.LogWarning($"No sandwiches found at: {DateTime.UtcNow}.");
 
-            try
-            {
-                var products = await _productService.GetAllProductsAsync();
-
-                if (!products.Any())
-                {
-                    _logger.LogWarning("No products found.");
-
-                    return NoContent();
-                }
-
-                _logger.LogInformation($"Returning {products.Count()} products.");
-
-                return Ok(products);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"An error occurred while getting products at: {DateTime.UtcNow}.");
-                return StatusCode(500, "Internal server error.");
-            }
+            return NoContent();
         }
 
-        [HttpGet("sandwiches")]
-        [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetSandwiches()
+        _logger.LogInformation($"Returning {sandwiches.Count()} sandwiches.");
+
+        return Ok(sandwiches);
+    }
+
+    /// <summary>
+    /// Retrieves all extras from the system.
+    /// </summary>
+    /// <returns>A list of extras. If no extras are found, returns a 204 No Content status.</returns>
+    /// <response code="200">Returns a list of extras.</response>
+    /// <response code="204">No extras found.</response>
+    [HttpGet("extras")]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetExtras()
+    {
+        _logger.LogInformation($"GET /products/extras called at: {DateTime.UtcNow}.");
+
+        var extras = await _productService.GetExtrasAsync();
+
+        if (!extras.Any())
         {
-            _logger.LogInformation($"GET /products/sandwiches called at: {DateTime.UtcNow}.");
+            _logger.LogWarning($"No extras found at: {DateTime.UtcNow}");
 
-            try
-            {
-                var sandwiches = await _productService.GetSandwichesAsync();
-
-                if (!sandwiches.Any())
-                {
-                    _logger.LogWarning($"No sandwiches found at: {DateTime.UtcNow}.");
-
-                    return NoContent();
-                }
-
-                _logger.LogInformation($"Returning {sandwiches.Count()} sandwiches.");
-
-                return Ok(sandwiches);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"An error occurred while getting sandwiches at: {DateTime.UtcNow}.");
-                return StatusCode(500, "Internal server error.");
-            }
+            return NoContent();
         }
 
-        [HttpGet("extras")]
-        [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetExtras()
-        {
-            _logger.LogInformation($"GET /products/extras called at: {DateTime.UtcNow}.");
+        _logger.LogInformation($"Returning {extras.Count()} extras.");
 
-            try
-            {
-                var extras = await _productService.GetExtrasAsync();
-
-                if (!extras.Any())
-                {
-                    _logger.LogWarning($"No extras found at: {DateTime.UtcNow}");
-                    
-                    return NoContent();
-                }
-
-                _logger.LogInformation($"Returning {extras.Count()} extras.");
-
-                return Ok(extras);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"An error occurred while getting extras at: {DateTime.UtcNow}.");
-                return StatusCode(500, "Internal server error.");
-            }
-        }
+        return Ok(extras);
     }
 }

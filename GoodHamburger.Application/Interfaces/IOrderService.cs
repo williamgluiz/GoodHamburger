@@ -8,7 +8,7 @@ namespace GoodHamburger.Application.Interfaces
         Task<OrderResponseDTO?> GetByIdAsync(Guid id);
         Task<IEnumerable<OrderResponseDTO>> GetAllAsync();
         Task<OrderResponseDTO> UpdateOrderAsync(Guid id, UpdateOrderDTO dto);
-        Task<bool> DeleteAsync(Guid id);
+        Task DeleteAsync(Guid id);
         Task<bool> HasDuplicatedProductTypesAsync(IEnumerable<OrderItemDTO> items);
     }
 }

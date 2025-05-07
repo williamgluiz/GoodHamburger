@@ -1,8 +1,7 @@
-﻿namespace GoodHamburger.Domain.Models
+﻿namespace GoodHamburger.Domain.Models;
+
+public abstract class Entity
 {
-    public abstract class Entity
-    {
-        public Guid Id { get; set; }
-        protected Entity() { Id = Guid.NewGuid(); }
-    }
+    public Guid Id { get; set; }
+    protected Entity() { Id = Guid.NewGuid(); }
 }

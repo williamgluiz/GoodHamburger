@@ -1,10 +1,9 @@
-﻿namespace GoodHamburger.Domain.Models
+﻿namespace GoodHamburger.Domain.Models;
+
+public class Extra : Product
 {
-    public class Extra : Product
+    public Extra()
     {
-        public Extra()
-        {
-            Type = ProductType.Extra;
-        }
+        Type = ProductType.Extra;
     }
 }

@@ -1,10 +1,9 @@
-﻿namespace GoodHamburger.Domain.Models
+﻿namespace GoodHamburger.Domain.Models;
+
+public class Sandwich : Product
 {
-    public class Sandwich : Product
+    public Sandwich()
     {
-        public Sandwich()
-        {
-            Type = ProductType.Sandwich;
-        }
+        Type = ProductType.Sandwich;
     }
 }

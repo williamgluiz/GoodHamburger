@@ -1,8 +1,7 @@
-﻿namespace GoodHamburger.Domain.Models
+﻿namespace GoodHamburger.Domain.Models;
+
+public enum ProductType
 {
-    public enum ProductType
-    {
-        Sandwich,
-        Extra
-    }
+    Sandwich,
+    Extra
 }
