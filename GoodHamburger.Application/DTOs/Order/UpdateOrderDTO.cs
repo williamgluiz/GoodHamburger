@@ -1,7 +1,6 @@
-﻿namespace GoodHamburger.Application.DTOs.Order
+﻿namespace GoodHamburger.Application.DTOs.Order;
+
+public class UpdateOrderDTO
 {
-    public class UpdateOrderDTO
-    {
-        public List<OrderItemDTO> Items { get; set; } = [];
-    }
+    public List<OrderItemDTO> Items { get; set; } = [];
 }

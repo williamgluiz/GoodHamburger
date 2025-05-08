@@ -23,7 +23,7 @@ public class ProductsController : ControllerBase
     }
 
     /// <summary>
-    /// Retrieves all products from the system.
+    /// Retrieves all products from the system (Sandwiches and Extras).
     /// </summary>
     /// <returns>A list of products. If no products are found, returns a 204 No Content status.</returns>
     /// <response code="200">Returns a list of products.</response>
@@ -50,7 +50,7 @@ public class ProductsController : ControllerBase
     }
 
     /// <summary>
-    /// Retrieves all sandwiches from the system.
+    /// Retrieves all sandwiches from the system (Sandwiches only).
     /// </summary>
     /// <returns>A list of sandwiches. If no sandwiches are found, returns a 204 No Content status.</returns>
     /// <response code="200">Returns a list of sandwiches.</response>
@@ -77,7 +77,7 @@ public class ProductsController : ControllerBase
     }
 
     /// <summary>
-    /// Retrieves all extras from the system.
+    /// Retrieves all extras from the system (Extras only).
     /// </summary>
     /// <returns>A list of extras. If no extras are found, returns a 204 No Content status.</returns>
     /// <response code="200">Returns a list of extras.</response>

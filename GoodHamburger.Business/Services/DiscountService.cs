@@ -5,38 +5,51 @@ namespace GoodHamburger.Domain.Services;
 public class DiscountService
 {
     /// <summary>
-    /// Calculates the discount and final amount for a list of order items based on specific conditions.
+    /// Calculates the discount percentage and final amount for a list of order items based on their categories.
     /// </summary>
     /// <param name="items">A list of <see cref="OrderItem"/> objects representing the items in the order.</param>
     /// <returns>
     /// A tuple containing:
     /// <list type="bullet">
     /// <item>
-    /// <description>The discount percentage applied (as a decimal).</description>
+    /// <description>The discount percentage applied (as a value between 0 and 100).</description>
     /// </item>
     /// <item>
-    /// <description>The final amount after the discount has been applied.</description>
+    /// <description>The final amount after applying the discount.</description>
     /// </item>
     /// </list>
     /// </returns>
     /// <remarks>
-    /// The discount is applied based on the following conditions:
-    /// - 20% discount if the order contains a sandwich, drink, and fries.
-    /// - 15% discount if the order contains a sandwich and drink.
+    /// The discount is determined using the following rules:
+    /// - 20% discount if the order contains a sandwich, a soft drink, and fries.
+    /// - 15% discount if the order contains a sandwich and a soft drink.
     /// - 10% discount if the order contains a sandwich and fries.
-    /// No discount is applied for other combinations of items.
+    /// No discount is applied for other combinations.
+    /// 
+    /// Product categories are resolved via <see cref="ProductCategoryResolver.GetCategory(Product)"/>.
     /// </remarks>
-    //TODO: WTF???
     public (decimal discountPercent, decimal finalAmount) ApplyDiscount(List<OrderItem> items)
     {
-        if(items == null || !items.Any())
+        if (items == null || !items.Any())
             return (0, 0);
 
         var total = items.Sum(item => item.Product.Price * item.Quantity);
 
-        bool hasSandwich = items.Any(item => item.Product.Type == ProductType.Sandwich);
-        bool hasDrink = items.Any(item => item.Product.Name.Equals("Soft Drink", StringComparison.OrdinalIgnoreCase));
-        bool hasFries = items.Any(item => item.Product.Name.Equals("Fries", StringComparison.OrdinalIgnoreCase));
+        bool hasSandwich = false;
+        bool hasDrink = false;
+        bool hasFries = false;
+
+        foreach (var item in items)
+        {
+            var category = ProductCategoryResolver.GetCategory(item.Product);
+
+            if (category.Equals("Sandwich", StringComparison.OrdinalIgnoreCase))
+                hasSandwich = true;
+            else if (category.Equals("SoftDrink", StringComparison.OrdinalIgnoreCase))
+                hasDrink = true;
+            else if (category.Equals("Fries", StringComparison.OrdinalIgnoreCase))
+                hasFries = true;
+        }
 
         decimal discount = 0;
 

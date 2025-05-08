@@ -42,7 +42,6 @@ public class OrdersController : ControllerBase
         return Ok(orders);
     }
 
-    //TODO: Remover este
     /// <summary>
     /// Retrieves an order by its unique identifier.
     /// </summary>
@@ -55,6 +54,7 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(typeof(OrderResponseDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public async Task<ActionResult<OrderResponseDTO>> GetById(Guid id)
     {
         _logger.LogInformation($"GET /api/Orders/{id} called at: {DateTime.UtcNow}.");
@@ -87,7 +87,7 @@ public class OrdersController : ControllerBase
 
         try
         {
-            var hasDuplicates = await _orderService.HasDuplicatedProductTypesAsync(dto.Items);
+            var hasDuplicates = await _orderService.HasDuplicatedProductAsync(dto.Items);
 
             if (hasDuplicates)
                 return BadRequest("The order cannot contain more than one sandwich, fries, or soda.");
@@ -126,7 +126,7 @@ public class OrdersController : ControllerBase
 
         try
         {
-            var hasDuplicates = await _orderService.HasDuplicatedProductTypesAsync(dto.Items);
+            var hasDuplicates = await _orderService.HasDuplicatedProductAsync(dto.Items);
 
             if (hasDuplicates)
                 return BadRequest("The order cannot contain more than one sandwich, fries, or soda.");
